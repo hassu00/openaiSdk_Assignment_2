@@ -6,6 +6,20 @@ from gemini_config import model
 def multiplier(a: int, b: int) -> int:
     return a * b
 
+@function_tool
+def adder(a: int, b: int) -> int:
+    return a + b
+
+@function_tool
+def divider(a: int, b: int) -> float:
+    if b == 0:
+        return 0
+    return a / b 
+
+@function_tool
+def subtractor(a: int, b: int) -> int:
+    return a - b
+
 def dynamic_instruction(ctx: RunContextWrapper, agent):
  
     instruction = (
@@ -22,5 +36,5 @@ teacher_agent = Agent(
     name="GeminiAgent",
     instructions=dynamic_instruction,
     model=model,
-    tools=[multiplier]
+    tools=[multiplier, adder, divider, subtractor]
     )
